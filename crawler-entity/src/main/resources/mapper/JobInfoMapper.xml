@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jointsky.crawler.entity.mapper.JobInfoMapper">
+    <resultMap id="BaseResultMap" type="com.jointsky.crawler.entity.model.JobInfo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <constructor>
+            <idArg column="job_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="job_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="job_group" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="job_status" javaType="java.lang.String" jdbcType="CHAR"/>
+            <arg column="page_processor_class" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="pipeline_class" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="crawler_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="thread_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="exit_whith_complete" javaType="java.lang.String" jdbcType="CHAR"/>
+            <arg column="cron_expression" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="add_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+
+</mapper>

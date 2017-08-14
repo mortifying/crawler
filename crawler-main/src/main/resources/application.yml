@@ -1,0 +1,77 @@
+#默认配置
+server:
+    port: 8080
+    context-path: /v1
+    tomcat:
+         basedir: /tmp/logs/access
+         accesslog:
+             enabled: true
+             pattern: '%t %a "%r" %s (%D ms)'
+    session:
+         timeout: 1800
+
+spring:
+  mvc:
+    static-path-pattern: /**
+  http.multipart:
+      max-request-size: 30MB
+      max-file-size: 30MB
+
+logging:
+    level:
+         root: info
+    path: /tmp/logs
+    #file: service-boot.log
+
+restApiPath: /api
+
+druid:
+    url: jdbc:mysql://127.0.0.1:3306/jointsky_crawler
+    username: crawler
+    password: crawler
+    initial-size: 1
+    min-idle: 1
+    max-active: 20
+    test-on-borrow: true
+    filters: stat,wall,log4j
+
+redis:
+    host: 127.0.0.1
+    port: 6379
+    max-idle: 8
+    min-idle: 0
+    max-active: 8
+    max-wait: -1
+    timeout: 0
+
+mybatis:
+    typeAliasesPackage: com.jointsky.crawler.**.model
+    mapperLocations: classpath:mapper/*Mapper.xml
+    configLocation: classpath:mybatis-config.xml
+    checkConfigLocation: true
+
+mapper:
+    mappers:
+        - com.jointsky.crawler.entity.util.CrawlerMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+kafka:
+    consumer:
+        broker: bigdata201.colin.com:6667
+        autoCommitIntervalMs: 100
+        groupId: test
+        sessionTimeoutMs: 15000
+        autoOffsetReset: latest
+    producer:
+        broker: bigdata201.colin.com:6667 #必须配置成域名或者主机名
+        retries: 0
+        lingerMs: 1
+        batchSize: 4096
+        bufferMemory: 40960
