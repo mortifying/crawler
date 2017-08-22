@@ -1,10 +1,12 @@
 package com.jointsky.crawler.quartz.job;
 
 import com.jointsky.crawler.entity.model.JobInfo;
+import com.jointsky.crawler.quartz.common.utils.HttpUtils;
 import com.jointsky.crawler.quartz.model.AbstractExecutableJob;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.pipeline.Pipeline;
@@ -29,10 +31,17 @@ public class ExecutableJob extends AbstractExecutableJob {
         String crawlerUrl = this.jobInfo.getCrawlerUrl();
         int threadNum = this.jobInfo.getThreadNum();
         boolean exitWithCpmplete = this.jobInfo.getExitWhithComplete().equals("1");
+        String type = this.jobInfo.getType();
+        String params = this.jobInfo.getParams();
+        Request request = null;
 
-        if (null == crawlerUrl || "".equals(crawlerUrl)) {
+        if (type.equalsIgnoreCase("GET") && (null == crawlerUrl || "".equals(crawlerUrl))) {
             LOGGER.error("crawler url 不能为空");
             return false;
+        }
+
+        if (!"".equals(type) && type.equalsIgnoreCase("POST")) {
+            request = HttpUtils.getRequest(crawlerUrl, params);
         }
 
         Class pageProcessorInstance = null;
@@ -62,13 +71,19 @@ public class ExecutableJob extends AbstractExecutableJob {
 
         assert pageProcessor != null;
         Spider spider = OOSpider.create(pageProcessor)
-                .addUrl(crawlerUrl)
                 .addPipeline(pipeline)
                 .setExitWhenComplete(exitWithCpmplete);
         if (threadNum > 0) {
             spider.thread(threadNum);
         }
+        if (type.equalsIgnoreCase("GET")) {
+            spider.addUrl(crawlerUrl);
+        } else if (type.equalsIgnoreCase("POST")) {
+            spider.addRequest(request);
+        }
         spider.run();
         return true;
     }
+
+
 }

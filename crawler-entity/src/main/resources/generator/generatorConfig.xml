@@ -83,7 +83,7 @@
 
         <table tableName="sys_role"/>
         <table tableName="sys_role_resource"/>-->
-        <table tableName="proxy_ip"/>
+        <table tableName="province_month_data"/>
 
     </context>
 </generatorConfiguration>

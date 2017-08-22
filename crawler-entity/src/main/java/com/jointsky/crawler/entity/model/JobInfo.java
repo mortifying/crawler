@@ -26,7 +26,7 @@ public class JobInfo implements Serializable {
     private String jobGroup;
 
     /**
-     * 任务状态0：禁用，1：启用，3：删除
+     * 任务状态0：正常，1：暂停，-1：删除
      */
     @Column(name = "job_status")
     private String jobStatus;
@@ -48,6 +48,16 @@ public class JobInfo implements Serializable {
      */
     @Column(name = "crawler_url")
     private String crawlerUrl;
+
+    /**
+     * url请求方式
+     */
+    private String type;
+
+    /**
+     * POST请求事，请求参数，json格式
+     */
+    private String params;
 
     /**
      * 线程数
@@ -84,7 +94,7 @@ public class JobInfo implements Serializable {
     @Column(name = "update_time")
     private Date updateTime;
 
-    public JobInfo(String jobId, String jobName, String jobGroup, String jobStatus, String pageProcessorClass, String pipelineClass, String crawlerUrl, Integer threadNum, String exitWhithComplete, String cronExpression, String description, Date addTime, Date updateTime) {
+    public JobInfo(String jobId, String jobName, String jobGroup, String jobStatus, String pageProcessorClass, String pipelineClass, String crawlerUrl, String type, String params, Integer threadNum, String exitWhithComplete, String cronExpression, String description, Date addTime, Date updateTime) {
         this.jobId = jobId;
         this.jobName = jobName;
         this.jobGroup = jobGroup;
@@ -92,6 +102,8 @@ public class JobInfo implements Serializable {
         this.pageProcessorClass = pageProcessorClass;
         this.pipelineClass = pipelineClass;
         this.crawlerUrl = crawlerUrl;
+        this.type = type;
+        this.params = params;
         this.threadNum = threadNum;
         this.exitWhithComplete = exitWhithComplete;
         this.cronExpression = cronExpression;
@@ -159,18 +171,18 @@ public class JobInfo implements Serializable {
     }
 
     /**
-     * 获取任务状态0：禁用，1：启用，3：删除
+     * 获取任务状态0：正常，1：暂停，-1：删除
      *
-     * @return job_status - 任务状态0：禁用，1：启用，3：删除
+     * @return job_status - 任务状态0：正常，1：暂停，-1：删除
      */
     public String getJobStatus() {
         return jobStatus;
     }
 
     /**
-     * 设置任务状态0：禁用，1：启用，3：删除
+     * 设置任务状态0：正常，1：暂停，-1：删除
      *
-     * @param jobStatus 任务状态0：禁用，1：启用，3：删除
+     * @param jobStatus 任务状态0：正常，1：暂停，-1：删除
      */
     public void setJobStatus(String jobStatus) {
         this.jobStatus = jobStatus == null ? null : jobStatus.trim();
@@ -228,6 +240,42 @@ public class JobInfo implements Serializable {
      */
     public void setCrawlerUrl(String crawlerUrl) {
         this.crawlerUrl = crawlerUrl == null ? null : crawlerUrl.trim();
+    }
+
+    /**
+     * 获取url请求方式
+     *
+     * @return type - url请求方式
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * 设置url请求方式
+     *
+     * @param type url请求方式
+     */
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    /**
+     * 获取POST请求事，请求参数，json格式
+     *
+     * @return params - POST请求事，请求参数，json格式
+     */
+    public String getParams() {
+        return params;
+    }
+
+    /**
+     * 设置POST请求事，请求参数，json格式
+     *
+     * @param params POST请求事，请求参数，json格式
+     */
+    public void setParams(String params) {
+        this.params = params == null ? null : params.trim();
     }
 
     /**

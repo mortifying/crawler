@@ -44,7 +44,7 @@ public class ProxyIPPipeline implements Pipeline {
 
                 System.out.println("send message:" + proxyIp.getIp());
                 //TODO just test kafka producer
-                kafkaTemplate.send("test_topic", JSON.toJSONString(proxyIp));
+                //kafkaTemplate.send("test_topic", JSON.toJSONString(proxyIp));
             }
         }
 

@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface JobInfoMapper extends CrawlerMapper<JobInfo> {
 
-
     @Select("update job_info set job_status=#{jobStatus},update_time=#{updateTime} where job_id=#{jobId}")
     void updateJobStatusByJobId(@Param("jobId") String jobId, @Param("jobStatus") String jobStatus, @Param("updateTime") Date updateTime);
 

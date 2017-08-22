@@ -26,7 +26,7 @@ logging:
 restApiPath: /api
 
 druid:
-    url: jdbc:mysql://127.0.0.1:3306/jointsky_crawler
+    url: jdbc:mysql://192.168.3.115:3306/jointsky_crawler
     username: crawler
     password: crawler
     initial-size: 1
@@ -36,7 +36,7 @@ druid:
     filters: stat,wall,log4j
 
 redis:
-    host: 127.0.0.1
+    host: 192.168.3.115
     port: 6379
     max-idle: 8
     min-idle: 0
